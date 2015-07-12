@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="VosSoft.Xna.GameConsole.Command">
+    <Position X="7.25" Y="5.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAIAAAAAAAQAAQAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>Command.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VosSoft.Xna.GameConsole.GameConsole">
+    <Position X="0.5" Y="0.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>JQYGH0hBTBuIJ0xaDQABj1waH20UqjoHDEoSCKzjEkw=</HashCode>
+      <FileName>GameConsole.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VosSoft.Xna.GameConsole.CommandEventArgs">
+    <Position X="4.25" Y="12.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAEAQA=</HashCode>
+      <FileName>CommandEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VosSoft.Xna.GameConsole.InputEventArgs">
+    <Position X="6.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAQAAAAEAAAAAAAAAAAAAAAAQA=</HashCode>
+      <FileName>InputEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VosSoft.Xna.GameConsole.LogEntry">
+    <Position X="4.25" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAIAAAAAABAAAAIAAAAQA=</HashCode>
+      <FileName>LogEntry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="VosSoft.Xna.GameConsole.LogEventArgs">
+    <Position X="8.75" Y="12.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>LogEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="VosSoft.Xna.GameConsole.KeyModifier">
+    <Position X="8.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAFAAIAAAgAAAAAAAAAAAAAAAAAIIAAAAEAAAA=</HashCode>
+      <FileName>KeyMap.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="VosSoft.Xna.GameConsole.GameConsoleAnimation">
+    <Position X="4.25" Y="8.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAgAAAIAAIABAAAAAAAAIAAgAAACEEAAAA=</HashCode>
+      <FileName>GameConsole.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Delegate Name="VosSoft.Xna.GameConsole.CommandHandler">
+    <Position X="4.25" Y="11.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CommandEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="VosSoft.Xna.GameConsole.InputHandler">
+    <Position X="6.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>InputEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Delegate Name="VosSoft.Xna.GameConsole.LogHandler">
+    <Position X="8.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAIAAAA=</HashCode>
+      <FileName>LogEventArgs.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
