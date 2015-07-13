@@ -126,6 +126,8 @@ namespace VosSoft.Xna.GameConsole
 
         string _pasteResult = "";
 
+        private bool mashTab;
+
         #endregion
 
         #region Properties
@@ -1152,22 +1154,31 @@ namespace VosSoft.Xna.GameConsole
                     IEnumerable<string> autoCollection =
                         from c in commands.Keys where c.StartsWith(input) orderby c select c;
 
-                    if (autoCollection.Count() != 0)
-                    {
-                        int index = autoCollection.FirstOrDefault().Zip(
-                            autoCollection.LastOrDefault(), (c1, c2) => c1 == c2).TakeWhile(b => b).Count();
+                    if (autoCollection.Count() != 0) {
                         cursorPosition += autoCollection.FirstOrDefault().Zip(
                             autoCollection.LastOrDefault(), (c1, c2) => c1 == c2).TakeWhile(b => b).Count() - input.Length;
+                        int index = autoCollection.FirstOrDefault().Zip(
+                            autoCollection.LastOrDefault(), (c1, c2) => c1 == c2).TakeWhile(b => b).Count();
                         input = autoCollection.FirstOrDefault().Substring(0, index);
                         if (autoCollection.Count() > 1)
                         {
-                            Log(Prefix + input);
-                            foreach (string s in autoCollection)
-                            {
-                                Log(" -> " + s);
+                            if (!mashTab) {
+                                mashTab = true;
+                                Log(Prefix + input);
+                                foreach (string s in autoCollection) {
+                                    Log(" -> " + s);
+                                }
+                            }
+                            else if (mashTab) {
+                                cursorPosition += autoCollection.ElementAt(1).Length - input.Length;
+                                input = autoCollection.ElementAt(1);
                             }
                         }
                     }
+                } 
+                else 
+                {
+                    mashTab = false;
                 }
             }
         }
@@ -1179,6 +1190,7 @@ namespace VosSoft.Xna.GameConsole
                 input += inputText;
                 cursorPosition += inputText.Length;
             }
+            mashTab = false;
         }
 
         void ReceiveTextInput(char inputChar)
@@ -1207,6 +1219,7 @@ namespace VosSoft.Xna.GameConsole
                     InputChanged(this, new InputEventArgs(input));
                 }
             }
+            mashTab = false;
         }
 
         void ReceiveKeyCodeInput(Keys inputKey)
