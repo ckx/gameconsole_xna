@@ -1213,7 +1213,7 @@ namespace VosSoft.Xna.GameConsole
         {
             if (isOpen)
             {
-                if (closeKey != null && inputKey == Keys.F1)
+                if (closeKey != null && inputKey == closeKey)
                 {
                     Close();
                 }
