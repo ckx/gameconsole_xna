@@ -1796,7 +1796,6 @@ namespace VosSoft.Xna.GameConsole
                     inputHistoryPosition = inputHistory.Count;
                     if (addToLog)
                     {
-                        Log(Prefix + input);
                         if (reportOnError)
                         {
                             Log("Error: The argument count doesn't match the command.", 1);
@@ -1810,7 +1809,6 @@ namespace VosSoft.Xna.GameConsole
                     inputHistoryPosition = inputHistory.Count;
                     if (addToLog)
                     {
-                        Log(Prefix + input);
                         if (reportOnError)
                         {
                             Log("Error: One or more of the arguments have the wrong type.", 1);
@@ -1824,7 +1822,6 @@ namespace VosSoft.Xna.GameConsole
                     inputHistoryPosition = inputHistory.Count;
                     if (addToLog)
                     {
-                        Log(Prefix + input);
                         if (reportOnError)
                         {
                             Log("Error: " + ex.Message, 1);
