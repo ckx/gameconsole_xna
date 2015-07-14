@@ -1116,7 +1116,7 @@ namespace VosSoft.Xna.GameConsole
         {
             if (isOpen && inputEnabled)
             {
-                if (inputChar == '\r' && input.Trim() != "")
+                if (inputChar == '\r')
                 {
                     if (InputEntered != null)
                     {
@@ -1774,6 +1774,12 @@ namespace VosSoft.Xna.GameConsole
         public bool Execute(string input, bool addToLog)
         {
             input = input.Trim();
+            
+            if (input == "") {
+                Log(Prefix);
+                return true;
+            }
+
             string[] splitInput = input.Split(new char[] { ' ', '\t' }, StringSplitOptions.RemoveEmptyEntries);
 
             if (commands.ContainsKey(splitInput[0]))

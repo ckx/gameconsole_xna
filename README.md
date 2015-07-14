@@ -17,12 +17,13 @@ This is a port of [XNA Game Console](https://console.codeplex.com/) by [vos](htt
    * Traverse buffer with mousewheel 
    * All commands sent to the console are added to inputHistory, even those resulting in an error
      * Handy so if you typo a command you can correct it by hitting up-arrow
-   * Prompt character (`Prefix`) added to console log when commands are executed
+   * Prompt character (`Prefix`) added to console log when commands are executed, or when no input is supplied
    * `save` now saves to file "con_log" if no arguments are supplied
    * Some of the built-in commands have been renamed
      * `info` → `con_info`
      * `set` → `con_set`
      * `toggle` → `con_tog`
+	 * `help` → removed from commands
 
 
 ##### Note
