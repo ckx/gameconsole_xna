@@ -998,7 +998,7 @@ namespace VosSoft.Xna.GameConsole
             "con_toggle autoscroll - toggles the auto scrolling for the log.",
             "con_toggle fullscreen - toggles the fullscreen mode of the console.");
 
-            AddCommand("save", delegate(object sender, CommandEventArgs e)
+            AddCommand("con_save", delegate(object sender, CommandEventArgs e)
             {
                 if (e.Args.Length > 0)
                 {
@@ -1021,7 +1021,7 @@ namespace VosSoft.Xna.GameConsole
                     Log("Log successfully saved: " + "con_log");
                 }
             }, "Saves the entire log to the provided file.",
-            "save <path> - the path can be relative or absolute.",
+            "con_save <path> - the path can be relative or absolute.",
             "If no path is supplied it saves to a file named con_log.");
 
             updateView(false);
