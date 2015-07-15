@@ -121,12 +121,12 @@ namespace VosSoft.Xna.GameConsole
 
         float cursorBlinkTime = 1.0f, currentCursorBlinkTime;
 
-        private MouseState currentMouseState;
-        private int oldScrollWheelValue;
+        MouseState currentMouseState;
+        int oldScrollWheelValue;
 
-        string _pasteResult = "";
+        string pasteResult = "";
 
-        private bool mashTab;
+        bool mashTab;
 
         #endregion
 
@@ -977,10 +977,6 @@ namespace VosSoft.Xna.GameConsole
                         IsFullscreen = !IsFullscreen;
                         Log("IsFullscreen = " + IsFullscreen.ToString(), 255);
                     }
-                    else if (e.Args[0] == "")
-                    {
-                        
-                    }
                     else
                     {
                         Log("Command 'con_toggle " + e.Args[0] + "' not found.", 1);
@@ -1074,11 +1070,11 @@ namespace VosSoft.Xna.GameConsole
         {
             if (Clipboard.ContainsText())
             {
-                _pasteResult = Clipboard.GetText();
+                pasteResult = Clipboard.GetText();
             }
             else
             {
-                _pasteResult = "";
+                pasteResult = "";
             }
         }
 
@@ -1094,7 +1090,7 @@ namespace VosSoft.Xna.GameConsole
                     thread.SetApartmentState(ApartmentState.STA);
                     thread.Start();
                     thread.Join();
-                    ReceiveTextInput(_pasteResult);
+                    ReceiveTextInput(pasteResult);
                 }
                 else
                 {
@@ -1170,8 +1166,8 @@ namespace VosSoft.Xna.GameConsole
                                 }
                             }
                             else if (mashTab) {
-                                cursorPosition += autoCollection.ElementAt(1).Length - input.Length;
-                                input = autoCollection.ElementAt(1);
+                                cursorPosition += autoCollection.ElementAt(0).Length - input.Length;
+                                input = autoCollection.ElementAt(0);
                             }
                         }
                     }
