@@ -1165,9 +1165,19 @@ namespace VosSoft.Xna.GameConsole
                                     Log(" -> " + s);
                                 }
                             }
-                            else if (mashTab) {
-                                cursorPosition += autoCollection.ElementAt(0).Length - input.Length;
-                                input = autoCollection.ElementAt(0);
+                            else if (mashTab)
+                            {
+                                if (input == autoCollection.ElementAt(0)) 
+                                {
+                                    cursorPosition += autoCollection.ElementAt(1).Length - input.Length;
+                                    input = autoCollection.ElementAt(1);
+                                } 
+                                else 
+                                {
+                                    cursorPosition += autoCollection.ElementAt(0).Length - input.Length;
+                                    input = autoCollection.ElementAt(0);
+                                }
+                               
                             }
                         }
                     }
