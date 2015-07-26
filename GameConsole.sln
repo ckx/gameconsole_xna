@@ -4,19 +4,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameConsole", "GameConsole\GameConsole.csproj", "{7977BBD3-02A2-4CC0-AB09-62C0718C0C33}"
-	ProjectSection(ProjectDependencies) = postProject
-		{5741E266-A098-4A0B-99A3-BD1A4B40FB5E} = {5741E266-A098-4A0B-99A3-BD1A4B40FB5E}
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameConsoleContent", "GameConsoleContent\GameConsoleContent.csproj", "{5741E266-A098-4A0B-99A3-BD1A4B40FB5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExampleGame", "ExampleGame\ExampleGame.csproj", "{9EF3C6E1-4614-4FA5-8A58-77419A75C950}"
 	ProjectSection(ProjectDependencies) = postProject
-		{5741E266-A098-4A0B-99A3-BD1A4B40FB5E} = {5741E266-A098-4A0B-99A3-BD1A4B40FB5E}
 		{7977BBD3-02A2-4CC0-AB09-62C0718C0C33} = {7977BBD3-02A2-4CC0-AB09-62C0718C0C33}
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameConsoleContentContent", "GameConsoleContent\Content\GameConsoleContentContent.contentproj", "{BB027DEA-7E7E-48E0-B295-C60AF964E58A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,16 +20,10 @@ Global
 		{7977BBD3-02A2-4CC0-AB09-62C0718C0C33}.Debug|x86.Build.0 = Debug|x86
 		{7977BBD3-02A2-4CC0-AB09-62C0718C0C33}.Release|x86.ActiveCfg = Release|x86
 		{7977BBD3-02A2-4CC0-AB09-62C0718C0C33}.Release|x86.Build.0 = Release|x86
-		{5741E266-A098-4A0B-99A3-BD1A4B40FB5E}.Debug|x86.ActiveCfg = Debug|x86
-		{5741E266-A098-4A0B-99A3-BD1A4B40FB5E}.Debug|x86.Build.0 = Debug|x86
-		{5741E266-A098-4A0B-99A3-BD1A4B40FB5E}.Release|x86.ActiveCfg = Release|x86
-		{5741E266-A098-4A0B-99A3-BD1A4B40FB5E}.Release|x86.Build.0 = Release|x86
 		{9EF3C6E1-4614-4FA5-8A58-77419A75C950}.Debug|x86.ActiveCfg = Debug|x86
 		{9EF3C6E1-4614-4FA5-8A58-77419A75C950}.Debug|x86.Build.0 = Debug|x86
 		{9EF3C6E1-4614-4FA5-8A58-77419A75C950}.Release|x86.ActiveCfg = Release|x86
 		{9EF3C6E1-4614-4FA5-8A58-77419A75C950}.Release|x86.Build.0 = Release|x86
-		{BB027DEA-7E7E-48E0-B295-C60AF964E58A}.Debug|x86.ActiveCfg = Debug|x86
-		{BB027DEA-7E7E-48E0-B295-C60AF964E58A}.Release|x86.ActiveCfg = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

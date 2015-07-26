@@ -161,7 +161,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="GameConsole.cd" />
     <None Include="Resources\DevConsoleFont.xnb" />
   </ItemGroup>
   <ItemGroup>

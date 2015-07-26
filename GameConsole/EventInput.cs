@@ -1,35 +1,33 @@
 ﻿#region Using Statements
-using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
 using System;
 using System.Runtime.InteropServices;
-
+using System.Text;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Input;
 #endregion
 
 namespace VosSoft.Xna.GameConsole
 {
-
     public class KeyboardLayout
     {
-        const uint KLF_ACTIVATE = 1; //activate the layout
-        const int KL_NAMELENGTH = 9; // length of the keyboard buffer
-        const string LANG_EN_US = "00000409";
-        const string LANG_HE_IL = "0001101A";
+        private const uint KLF_ACTIVATE = 1; //activate the layout
+        private const int KL_NAMELENGTH = 9; // length of the keyboard buffer
+        private const string LANG_EN_US = "00000409";
+        private const string LANG_HE_IL = "0001101A";
 
         [DllImport("user32.dll")]
-        private static extern long LoadKeyboardLayout(
-              string pwszKLID,  // input locale identifier
-              uint Flags       // input locale identifier options
-              );
+        private static extern long LoadKeyboardLayout(string pwszKlid, // input locale identifier
+            uint flags // input locale identifier options
+            );
 
         [DllImport("user32.dll")]
-        private static extern long GetKeyboardLayoutName(
-              System.Text.StringBuilder pwszKLID  //[out] string that receives the name of the locale identifier
-              );
+        private static extern long GetKeyboardLayoutName(StringBuilder pwszKlid
+            //[out] string that receives the name of the locale identifier
+            );
 
-        public static string getName()
+        public static string GetName()
         {
-            System.Text.StringBuilder name = new System.Text.StringBuilder(KL_NAMELENGTH);
+            StringBuilder name = new StringBuilder(KL_NAMELENGTH);
             GetKeyboardLayoutName(name);
             return name.ToString();
         }
@@ -37,67 +35,56 @@ namespace VosSoft.Xna.GameConsole
 
     public class CharacterEventArgs : EventArgs
     {
-        private readonly char character;
-        private readonly int lParam;
+        private readonly char _character;
+        private readonly int _lParam;
 
         public CharacterEventArgs(char character, int lParam)
         {
-            this.character = character;
-            this.lParam = lParam;
+            this._character = character;
+            this._lParam = lParam;
         }
 
-        public char Character
-        {
-            get { return character; }
+        public char Character {
+            get { return _character; }
         }
 
-        public int Param
-        {
-            get { return lParam; }
+        public int Param {
+            get { return _lParam; }
         }
 
-        public int RepeatCount
-        {
-            get { return lParam & 0xffff; }
+        public int RepeatCount {
+            get { return _lParam & 0xffff; }
         }
 
-        public bool ExtendedKey
-        {
-            get { return (lParam & (1 << 24)) > 0; }
+        public bool ExtendedKey {
+            get { return (_lParam & (1 << 24)) > 0; }
         }
 
-        public bool AltPressed
-        {
-            get { return (lParam & (1 << 29)) > 0; }
+        public bool AltPressed {
+            get { return (_lParam & (1 << 29)) > 0; }
         }
 
-        public bool PreviousState
-        {
-            get { return (lParam & (1 << 30)) > 0; }
+        public bool PreviousState {
+            get { return (_lParam & (1 << 30)) > 0; }
         }
 
-        public bool TransitionState
-        {
-            get { return (lParam & (1 << 31)) > 0; }
+        public bool TransitionState {
+            get { return (_lParam & (1 << 31)) > 0; }
         }
     }
 
     public class KeyEventArgs : EventArgs
     {
-        private Keys keyCode;
-
         public KeyEventArgs(Keys keyCode)
         {
-            this.keyCode = keyCode;
+            KeyCode = keyCode;
         }
 
-        public Keys KeyCode
-        {
-            get { return keyCode; }
-        }
+        public Keys KeyCode { get; private set; }
     }
 
     public delegate void CharEnteredHandler(CharacterEventArgs e);
+
     public delegate void KeyEventHandler(KeyEventArgs e);
 
     public static class EventInput
@@ -117,36 +104,37 @@ namespace VosSoft.Xna.GameConsole
         /// </summary>
         public static event KeyEventHandler KeyUp;
 
-        delegate IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
+        private delegate IntPtr WndProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam);
 
-        static bool initialized;
-        static IntPtr prevWndProc;
-        static WndProc hookProcDelegate;
-        static IntPtr hIMC;
+        private static bool _initialized;
+        private static IntPtr _prevWndProc;
+        private static WndProc _hookProcDelegate;
+        private static IntPtr _hImc;
 
         //various Win32 constants that we need
-        const int GWL_WNDPROC = -4;
-        const int WM_KEYDOWN = 0x100;
-        const int WM_KEYUP = 0x101;
-        const int WM_CHAR = 0x102;
-        const int WM_IME_SETCONTEXT = 0x0281;
-        const int WM_INPUTLANGCHANGE = 0x51;
-        const int WM_GETDLGCODE = 0x87;
-        const int WM_IME_COMPOSITION = 0x10f;
-        const int DLGC_WANTALLKEYS = 4;
+        private const int GWL_WNDPROC = -4;
+        private const int WM_KEYDOWN = 0x100;
+        private const int WM_KEYUP = 0x101;
+        private const int WM_CHAR = 0x102;
+        private const int WM_IME_SETCONTEXT = 0x0281;
+        private const int WM_INPUTLANGCHANGE = 0x51;
+        private const int WM_GETDLGCODE = 0x87;
+        private const int WM_IME_COMPOSITION = 0x10f;
+        private const int DLGC_WANTALLKEYS = 4;
 
         //Win32 functions that we're using
         [DllImport("Imm32.dll", CharSet = CharSet.Unicode)]
-        static extern IntPtr ImmGetContext(IntPtr hWnd);
+        private static extern IntPtr ImmGetContext(IntPtr hWnd);
 
         [DllImport("Imm32.dll", CharSet = CharSet.Unicode)]
-        static extern IntPtr ImmAssociateContext(IntPtr hWnd, IntPtr hIMC);
+        private static extern IntPtr ImmAssociateContext(IntPtr hWnd, IntPtr hImc);
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+        private static extern IntPtr CallWindowProc(IntPtr lpPrevWndFunc, IntPtr hWnd, uint msg,
+            IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
-        static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
 
         /// <summary>
@@ -155,49 +143,55 @@ namespace VosSoft.Xna.GameConsole
         /// <param name="window"> The XNA window to which text input should be linked.</param>
         public static void Initialize(GameWindow window)
         {
-            if (initialized)
+            if (_initialized) {
                 throw new InvalidOperationException("TextInput.Initialize can only be called once!");
+            }
 
-            hookProcDelegate = new WndProc(HookProc);
-            prevWndProc = (IntPtr)SetWindowLong(window.Handle, GWL_WNDPROC,
-                (int)Marshal.GetFunctionPointerForDelegate(hookProcDelegate));
+            _hookProcDelegate = HookProc;
+            _prevWndProc =
+                (IntPtr)
+                    SetWindowLong(window.Handle, GWL_WNDPROC,
+                        (int)Marshal.GetFunctionPointerForDelegate(_hookProcDelegate));
 
-            hIMC = ImmGetContext(window.Handle);
-            initialized = true;
+            _hImc = ImmGetContext(window.Handle);
+            _initialized = true;
         }
 
-        static IntPtr HookProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
+        private static IntPtr HookProc(IntPtr hWnd, uint msg, IntPtr wParam, IntPtr lParam)
         {
-            IntPtr returnCode = CallWindowProc(prevWndProc, hWnd, msg, wParam, lParam);
+            IntPtr returnCode = CallWindowProc(_prevWndProc, hWnd, msg, wParam, lParam);
 
-            switch (msg)
-            {
+            switch (msg) {
                 case WM_GETDLGCODE:
                     returnCode = (IntPtr)(returnCode.ToInt32() | DLGC_WANTALLKEYS);
                     break;
 
                 case WM_KEYDOWN:
-                    if (KeyDown != null)
+                    if (KeyDown != null) {
                         KeyDown(new KeyEventArgs((Keys)wParam));
+                    }
                     break;
 
                 case WM_KEYUP:
-                    if (KeyUp != null)
+                    if (KeyUp != null) {
                         KeyUp(new KeyEventArgs((Keys)wParam));
+                    }
                     break;
 
                 case WM_CHAR:
-                    if (CharEntered != null)
+                    if (CharEntered != null) {
                         CharEntered(new CharacterEventArgs((char)wParam, lParam.ToInt32()));
+                    }
                     break;
 
                 case WM_IME_SETCONTEXT:
-                    if (wParam.ToInt32() == 1)
-                        ImmAssociateContext(hWnd, hIMC);
+                    if (wParam.ToInt32() == 1) {
+                        ImmAssociateContext(hWnd, _hImc);
+                    }
                     break;
 
                 case WM_INPUTLANGCHANGE:
-                    ImmAssociateContext(hWnd, hIMC);
+                    ImmAssociateContext(hWnd, _hImc);
                     returnCode = (IntPtr)1;
                     break;
             }
